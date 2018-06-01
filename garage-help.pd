@@ -1,0 +1,51 @@
+#N canvas 620 103 812 503 10;
+#X obj 11 45 dac~;
+#X obj 429 37 hsl 128 15 0 127 0 0 beats/beatshift empty beats/beatshift
+-2 -8 0 10 -262144 -1 -1 0 1;
+#X obj 12 126 f;
+#X obj 42 126 + 1;
+#X obj 12 83 tgl 15 0 empty empty empty 17 7 0 10 -260097 -1 -1 1 1
+;
+#X text 33 82 <- start timer;
+#X text 97 13 <- procedural garage beats;
+#X obj 12 148 s beats/tick;
+#X obj 12 104 metro 124;
+#X text 202 98 (same each Pd start);
+#N canvas 2 50 450 300 seed 0;
+#X obj 7 109 nbx 7 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
+-262144 -1 -1 63086 256;
+#X obj 7 58 inlet;
+#X obj 7 138 outlet;
+#X obj 7 79 random 65536;
+#X connect 0 0 2 0;
+#X connect 1 0 3 0;
+#X connect 3 0 0 0;
+#X coords 0 -1 1 1 85 30 2 0 100;
+#X restore 167 122 pd seed;
+#X obj 167 84 bng 32 250 50 0 empty empty empty 17 7 0 10 -260097 -1
+-1;
+#X text 203 82 deterministic seed;
+#X msg 167 156 \; beats/seed \$1 \; beats/makenew bang \;;
+#X obj 430 179 hsl 128 15 0 127 0 0 beats/hh-volume empty beats/hh-volume
+-2 -8 0 10 -262144 -1 -1 12700 1;
+#X obj 430 113 hsl 128 15 0 127 0 0 beats/sd-volume empty beats/sd-volume
+-2 -8 0 10 -262144 -1 -1 12700 1;
+#X obj 430 146 hsl 128 15 0 127 0 0 beats/bd-volume empty beats/bd-volume
+-2 -8 0 10 -262144 -1 -1 12700 1;
+#X obj 430 212 hsl 128 15 0 127 0 0 beats/cb-volume empty beats/cb-volume
+-2 -8 0 10 -262144 -1 -1 12700 1;
+#X text 18 266 table names and internal data to modify:;
+#X msg 21 287 \; beats/sd-loop = 0 or 1 length 16 \; beats/bd-loop
+= 0 or 1 length 16 \; beats/hh-loop = 0 or 1 length 16 \; beats/cb-loop
+= 0 or 1 length 16 \; beats/sd-sample = table name \; beats/bd-sample
+= table name \; beats/hh-sample = table name \;;
+#X obj 11 13 garage beats;
+#X connect 2 0 3 0;
+#X connect 2 0 7 0;
+#X connect 3 0 2 1;
+#X connect 4 0 8 0;
+#X connect 8 0 2 0;
+#X connect 10 0 13 0;
+#X connect 11 0 10 0;
+#X connect 20 0 0 0;
+#X connect 20 1 0 1;
